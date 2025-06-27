@@ -1,0 +1,216 @@
+# Industrial Image Management System - Product Requirements Document
+
+## 1. Product Overview
+
+### 1.1 Product Vision
+A web-based application that enables industrial inspection teams to efficiently upload, categorize, store, and retrieve inspection images with structured metadata for streamlined project management and analysis.
+
+### 1.2 Target Users
+- Industrial inspection professionals
+- Quality assurance teams
+- Project managers handling inspection data
+- Engineers conducting facility assessments
+
+### 1.3 Key Value Propositions
+- Streamlined bulk image processing with consistent metadata structure
+- Organized local storage with intuitive folder hierarchy
+- Flexible search and filtering capabilities
+- Standardized data export for reporting and analysis
+
+## 2. Core Features & Functionality
+
+### 2.1 Application Entry Point
+
+**Main Dashboard**
+Users select their primary action upon app launch:
+- **Classify New Images**: Process new image batches with metadata
+- **Edit Existing Images**: Modify metadata of previously processed images
+- **Search Images**: Find and filter images by metadata criteria
+
+### 2.2 New Image Classification Workflow
+
+#### 2.2.1 Project Setup & Configuration
+**Project Selection/Creation**
+Users choose from existing projects or create new ones:
+- Select existing Organization → existing Project
+- Select existing Organization → create new Project
+- Create new Organization → create new Project
+
+**Required Project Details:**
+- Organization Name (required)
+- Project Name (required)
+- Inspection Station (required)
+- Camera Name (required)
+- Storage location selection via file browser dialog
+
+These details auto-populate for all images in the upload batch.
+
+#### 2.2.2 Observation Template Setup
+Users define custom observation types for the current session:
+- Observation Name (string)
+- Observation Type (dropdown: string, numeric, boolean)
+- Optional default values
+- Templates can be saved for reuse across projects
+- Users can create, edit, and delete observation templates
+
+#### 2.2.3 Bulk Image Upload
+**Upload Functionality**
+- Drag-and-drop interface for bulk image selection
+- Support for multiple formats: PNG, JPEG, JPG
+- Batch processing of dozens to hundreds of images
+- Progress indicator during upload and processing
+- Error handling for unsupported files or processing failures
+
+#### 2.2.4 Individual Image Categorization
+**Image Review Interface**
+- Image-by-image review with thumbnail and full-size preview
+- Metadata form for each image:
+  - Auto-populated fields: Organization, Project, Inspection Station, Camera
+  - Optional fields: Title, Description
+  - Observation assignment from predefined templates
+  - Multiple observations can be applied to single image
+- Navigation controls: Previous/Next image, Skip, Bulk apply observations
+
+### 2.3 Edit Existing Images Workflow
+
+**Image Selection & Editing**
+- Navigate to and select existing image stores
+- Modify all metadata fields including:
+  - Project details
+  - Titles and descriptions
+  - Observation values
+- Bulk edit capabilities for multiple images
+- Version tracking for metadata changes
+- Validation to ensure required fields remain populated
+
+### 2.4 Search Images Workflow
+
+#### 2.4.1 Search Options
+**Filter-based Search**
+Dropdown menus for each metadata field:
+- Organization filter
+- Project filter
+- Inspection Station filter
+- Camera filter
+- Date range picker
+- Observation-based filters
+
+**Text-based Search**
+Search box supporting field:value syntax:
+- Examples: "project:Pipeline 2025", "temperature:>40", "leak:true"
+
+**Combined Search**
+Users can use both filter dropdowns and text search simultaneously.
+
+#### 2.4.2 Results Display
+- Thumbnail grid view with hover details
+- List view with metadata summary
+- Sortable columns (date, title, project, etc.)
+- Pagination for large result sets
+- Results counter and filtering status
+
+### 2.5 Storage & File Organization
+
+**Automated File Structure**
+Images and metadata saved to user-specified location with standardized hierarchy:
+```
+[User Selected Path]/
+├── [Organization]/
+│   ├── [Project]/
+│   │   ├── [InspectionStation]/
+│   │   │   ├── images/
+│   │   │   │   ├── img-001.jpg
+│   │   │   │   ├── img-002.png
+│   │   │   └── metadata/
+│   │   │       ├── img-001.json
+│   │   │       ├── img-002.json
+```
+
+**File Management**
+- Images copied/moved to designated storage location
+- Unique ID generation for each image (img-001, img-002, etc.)
+- JSON metadata files with standardized structure
+- Automatic timestamp generation (ISO 8601 format)
+- File integrity verification
+
+### 2.6 Data Export
+
+**CSV Export Functionality**
+- Export filtered image metadata to CSV format
+- Configurable column selection for export
+- Export includes file paths for image location reference
+- Batch export capabilities
+
+## 3. Technical Specifications
+
+### 3.1 Technology Stack
+- **Frontend**: Modern web technologies (React/Vue.js recommended)
+- **Backend**: Node.js or similar for file operations
+- **Storage**: Local file system with JSON metadata storage
+- **File Handling**: Native file system APIs for cross-platform compatibility
+
+### 3.2 Supported File Formats
+- **Images**: PNG, JPEG, JPG
+- **Metadata**: JSON
+- **Export**: CSV
+
+### 3.3 Performance Requirements
+- Handle bulk uploads of 100+ images efficiently
+- Responsive search results (<2 seconds for typical queries)
+- Smooth image preview and navigation
+- Minimal memory footprint for large image collections
+
+### 3.4 Data Structure
+```json
+{
+  "id": "img-001",
+  "imageFile": "images/img-001.jpg",
+  "timestamp": "2025-05-26T14:30:00Z",
+  "organisationName": "Acme Industrial Solutions",
+  "projectName": "Pipeline Integrity Assessment 2025",
+  "inspectionStation": "Station-A-012",
+  "cameraName": "CAM-THERMAL-05",
+  "title": "Thermal Image - Pipe Joint Inspection",
+  "description": "High resolution thermal imaging of pipe joint",
+  "observations": [
+    {
+      "observationName": "Temperature Reading",
+      "observationType": "numeric",
+      "observationValue": 45.7
+    },
+    {
+      "observationName": "Leak Detected",
+      "observationType": "bool",
+      "observationValue": true
+    }
+  ]
+}
+```
+
+## 4. User Experience Flows
+
+### 4.1 New Image Classification Flow
+1. **Entry Point**: User opens application and selects "Classify New Images"
+2. **Project Setup**: User selects existing project or creates new (Organization → Project → Station → Camera)
+3. **Storage Selection**: User selects local storage destination
+4. **Observation Templates**: User defines observation types and data types for current session
+5. **Upload**: User bulk uploads images via drag-and-drop
+6. **Categorization**: User processes images individually, adding observations (titles and descriptions optional)
+7. **Storage**: System automatically saves images and metadata to structured folders
+
+### 4.2 Edit Existing Images Flow
+1. **Entry Point**: User selects "Edit Existing Images"
+2. **Image Selection**: User navigates to and selects existing image stores
+3. **Metadata Editing**: User modifies existing image metadata and observations
+4. **Save Changes**: System updates metadata files with changes
+
+### 4.3 Search Images Flow
+1. **Entry Point**: User selects "Search Images"
+2. **Search Interface**: User applies filters or enters search terms
+3. **Results Review**: User reviews filtered results in grid or list view
+4. **Export**: User can export filtered results to CSV format
+
+### 4.4 Supporting Operations
+- **Template Management**: Create, edit, delete observation templates
+- **Bulk Operations**: Apply changes to multiple images simultaneously
+- **Data Validation**: Ensure required fields are populated and data types are correct

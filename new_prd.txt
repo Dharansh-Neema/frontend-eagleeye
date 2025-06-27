@@ -1,0 +1,170 @@
+Here's the extracted text from the PDF, organized by page:
+
+**--- PAGE 1 ---**
+
+**EagleEye V2 Frontend MVP - Product Requirements Document**
+
+**Product Overview**
+
+EagleEye V2 is a web-based platform for machine vision system integrators to build accurate inspection solutions through efficient image annotation, ground truth management, and dataset creation for training and evaluation.
+
+**Target Users**
+
+* Primary: Machine vision system integrators building quality control solutions
+* Secondary: Quality control engineers and vision system operators
+
+**Core User Value Proposition**
+
+Streamlined workflow for collecting, annotating, and managing training datasets with optimized UI for rapid image grading and ground truth annotation.
+
+**MVP Scope & Key Features**
+
+**1. Authentication & Project Access**
+
+* Login/Registration: Simple email/password authentication
+* Project Switching: Quick project selector for users with multi-project access
+* Role-based UI: Same interface with conditional edit permissions (Admin vs User)
+
+**2. Image Upload & Management Hub**
+
+* Training Data Upload: Bulk upload for raw images without ground truth
+* Multi-file drag-and-drop interface
+* Progress tracking for large batches
+* Associate images with specific camera/inspection station
+* Production Inference Upload: Batch upload for model output evaluation
+* Automatic EXIF metadata extraction for inference results
+* Parse and populate observation values from image metadata
+* Visual confirmation of extracted inference data
+* Image Gallery: Grid view with thumbnails, pagination, and basic filtering
+* Image Details: Full-size image viewer with metadata display
+
+**--- PAGE 2 ---**
+
+**3. Ground Truth Annotation System Core Feature**
+
+* **Image-level Annotation Interface:**
+    * Side-by-side layout: Image viewer + annotation form
+    * Dynamic form fields based on project's observation types
+    * Support for text, number, and categorical data types
+    * Quick navigation between images (Previous/Next buttons)
+* Annotation Status Tracking: Visual indicators for annotated vs unannotated images
+* Batch Operations: Select multiple images for status updates
+
+**4. Dataset Creation & Management**
+
+* Query Builder: Simple interface to filter images by ground truth values
+* Dataset Assembly: Create training/evaluation datasets from filtered results
+* Dataset Export: Download capabilities for external use
+
+**7. Project Structure Navigation**
+
+* Upload Type Selection: Choose between training data vs production inference upload
+* Batch Upload Interface:
+    * Camera/station selection before upload
+    * Progress tracking with error handling
+    * EXIF metadata preview for inference uploads
+    * Upload History: Track and manage previous upload sessions
+* Hierarchical View: Organization Project Inspection Station Camera structure
+* Context Switching: Maintain user's current location while allowing easy navigation
+* Breadcrumb Navigation: Clear path showing current location
+
+**User Workflows**
+
+**Primary Workflow: Training Data Collection & Annotation**
+
+1.  User uploads batch of raw images (no ground truth)
+2.  Selects project/camera context for upload
+3.  Opens annotation interface
+4.  Views image and manually adds ground truth observations
+5.  Quickly moves to next unannotated image
+
+**--- PAGE 3 ---**
+
+6.  Repeats until batch is complete
+
+**Secondary Workflow: Production Evaluation**
+
+1.  User uploads images with inference results in EXIF metadata
+2.  System extracts and displays inference observations
+3.  User reviews and adds/corrects ground truth for comparison
+4.  Creates evaluation datasets from annotated production data
+
+**Tertiary Workflow: Dataset Creation**
+
+1.  User defines filter criteria based on ground truth values
+2.  Reviews filtered image set
+3.  Creates and names dataset
+4.  Exports for training/evaluation use
+
+**Technical Requirements**
+
+**Performance Priorities**
+
+* Fast Image Loading: Optimized image display and caching
+* Responsive Annotation: Minimal latency between image switches
+* Efficient EXIF Processing: Quick metadata extraction and parsing
+* Efficient Pagination: Handle large image collections smoothly
+
+**UI/UX Principles**
+
+* Clean Minimalist Design: Uncluttered interface focusing on core functionality
+* Blue & White Color Scheme: Primary blue (`#3882F6`) with white backgrounds and subtle gray accents
+* shadcn/ui Component Library: Consistent, accessible components throughout
+* Keyboard Shortcuts: Support for rapid annotation workflows
+* Progressive Loading: Show content as it becomes available
+* Clear Visual Hierarchy: Prioritize annotation interface clarity
+* Mobile-Friendly: Responsive design for tablet/mobile access
+
+**Design System**
+
+* Primary Color: Blue `#3882F6` for primary actions, navigation, and key elements
+
+**--- PAGE 4 ---**
+
+* Secondary Color: White (`#FFFFFF`) for backgrounds and content areas
+* Accent Colors: Light gray (`#F8FAFC`) for subtle backgrounds, dark gray (`#647488`) for text
+* Typography: Clean, readable fonts with clear hierarchy
+* Components: `shadcn/ui` library for buttons, forms, cards, dialogs, and navigation
+* Layout: Generous white space, clear content separation, focused interfaces
+
+**Page Structure Overview**
+
+**1. Dashboard/Home**
+
+* Project overview cards
+* Quick access to recent work
+* Upload shortcuts (Training vs Production)
+
+**2. Upload Interface**
+
+* Upload type selection
+* Camera/station context selection
+* Batch upload with progress tracking
+* EXIF metadata preview (for production uploads)
+
+**3. Project View**
+
+* Camera/station hierarchy
+* Image collection overview
+* Annotation progress indicators
+
+**4. Annotation Interface**
+
+* Main image viewer
+* Ground truth form panel (with pre-filled inference data for production images)
+* Navigation controls
+* Progress tracking
+
+**5. Dataset Management**
+
+* Query interface
+* Dataset list
+* Export controls
+
+**--- PAGE 5 ---**
+
+**6. Image Gallery**
+
+* Thumbnail grid
+* Filter/search capabilities
+* Bulk selection tools
