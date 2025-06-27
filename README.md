@@ -127,20 +127,6 @@ The system provides two core functionalities:
    - **Raw JSON View**: Complete metadata in formatted JSON
 5. Download individual metadata as JSON files
 
-### 3. File Organization
-
-The system automatically creates organized directory structures:
-
-```
-[Selected Directory]/
-├── [Organization]/
-│   ├── [Project]/
-│   │   ├── [Inspection Station]/
-│   │   │   └── images/
-│   │   │       ├── img-001.jpg (with embedded metadata)
-│   │   │       ├── img-002.png (with embedded metadata)
-│   │   │       └── ...
-```
 
 **Note**: All metadata is embedded directly in the image files - no separate JSON files are created.
 
